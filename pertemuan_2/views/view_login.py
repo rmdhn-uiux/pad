@@ -10,34 +10,49 @@ class LoginView:
         self.auth = AuthController()
 
         self.root.title("Login - Sistem Absensi")
-        self.root.geometry("400x350")
+        
+        # Center the window on screen
+        self.root.update_idletasks()
+        width = 400
+        height = 420
+        x = (self.root.winfo_screenwidth() // 2) - (width // 2)
+        y = (self.root.winfo_screenheight() // 2) - (height // 2)
+        self.root.geometry(f"{width}x{height}+{x}+{y}")
+        self.root.resizable(False, False)  # Make login window fixed size for clean layout
 
-        frame = ttk.Frame(self.root, padding=30)
+        # Outer container with padding
+        frame = ttk.Frame(self.root, padding=35)
         frame.pack(fill=BOTH, expand=True)
 
-        ttk.Label(frame, text="SISTEM ABSENSI", font=("Helvetica", 18, "bold"),
-                  bootstyle=INFO).pack(pady=(0, 5))
-        ttk.Label(frame, text="Silakan login untuk melanjutkan",
-                  font=("Helvetica", 10), bootstyle=SECONDARY).pack(pady=(0, 20))
+        # Header Icon & Title
+        ttk.Label(frame, text="🔐", font=("Segoe UI", 36), anchor=CENTER).pack(pady=(0, 5))
+        ttk.Label(frame, text="SISTEM ABSENSI", font=("Segoe UI", 18, "bold"),
+                  bootstyle=INFO, anchor=CENTER).pack(pady=(0, 2))
+        ttk.Label(frame, text="Silakan masuk untuk melanjutkan",
+                  font=("Segoe UI", 10), bootstyle=SECONDARY, anchor=CENTER).pack(pady=(0, 25))
 
-        ttk.Label(frame, text="Username", font=("Helvetica", 10),
-                  bootstyle=LIGHT).pack(anchor=W)
-        self.entry_username = ttk.Entry(frame, font=("Helvetica", 11))
-        self.entry_username.pack(fill=X, pady=(0, 10))
+        # Username Input
+        ttk.Label(frame, text="👤 Username", font=("Segoe UI", 10, "bold"),
+                  bootstyle=LIGHT).pack(anchor=W, pady=(0, 5))
+        self.entry_username = ttk.Entry(frame, font=("Segoe UI", 11))
+        self.entry_username.pack(fill=X, pady=(0, 15))
         self.entry_username.focus()
 
-        ttk.Label(frame, text="Password", font=("Helvetica", 10),
-                  bootstyle=LIGHT).pack(anchor=W)
-        self.entry_password = ttk.Entry(frame, show="*", font=("Helvetica", 11))
+        # Password Input
+        ttk.Label(frame, text="🔒 Password", font=("Segoe UI", 10, "bold"),
+                  bootstyle=LIGHT).pack(anchor=W, pady=(0, 5))
+        self.entry_password = ttk.Entry(frame, show="*", font=("Segoe UI", 11))
         self.entry_password.pack(fill=X, pady=(0, 5))
 
-        self.label_error = ttk.Label(frame, text="", font=("Helvetica", 9),
+        # Error Message Label
+        self.label_error = ttk.Label(frame, text="", font=("Segoe UI", 9),
                                      bootstyle=DANGER)
-        self.label_error.pack(pady=(0, 5))
+        self.label_error.pack(pady=(0, 10))
 
-        self.btn_login = ttk.Button(frame, text="Login", bootstyle=INFO,
+        # Login Button
+        self.btn_login = ttk.Button(frame, text="Masuk ➔", bootstyle=INFO,
                                     command=self._handle_login)
-        self.btn_login.pack(fill=X, pady=(10, 0))
+        self.btn_login.pack(fill=X, ipady=5)
 
         self.root.bind("<Return>", lambda e: self._handle_login())
 
@@ -49,3 +64,4 @@ class LoginView:
             self.on_login_success(result['user'])
         else:
             self.label_error.config(text=result['message'])
+
