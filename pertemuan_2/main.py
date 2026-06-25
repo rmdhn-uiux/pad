@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 class AbsensiApp:
     def __init__(self):
-        self.root = ttk.Window(themename='cosmo')
+        self.root = ttk.Window(themename='superhero')
         self.root.resizable(True, True)
         self.root.minsize(800, 600)
 

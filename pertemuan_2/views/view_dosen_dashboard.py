@@ -33,16 +33,16 @@ class DosenDashboard:
         info_frame.pack(side=LEFT)
 
         ttk.Label(info_frame, text="Dashboard Dosen",
-                  font=("Helvetica", 16, "bold")).pack(anchor=W)
+                  font=("Helvetica", 16, "bold"), bootstyle=INFO).pack(anchor=W)
         ttk.Label(info_frame,
                   text=f"{self.user['nama']} | @{self.user['username']}",
                   font=("Helvetica", 10), bootstyle=SECONDARY).pack(anchor=W)
 
-        ttk.Button(header, text="Logout", bootstyle=SECONDARY,
+        ttk.Button(header, text="Logout", bootstyle=INFO,
                    command=self._handle_logout).pack(side=RIGHT)
 
     def _build_tabs(self):
-        notebook = ttk.Notebook(self.root, bootstyle=PRIMARY)
+        notebook = ttk.Notebook(self.root, bootstyle=INFO)
         notebook.pack(fill=BOTH, expand=True, padx=10, pady=5)
 
         tab_mahasiswa = ttk.Frame(notebook, padding=15)
@@ -60,7 +60,7 @@ class DosenDashboard:
     # ---- TAB MAHASISWA ----
     def _build_tab_mahasiswa(self, parent):
         ttk.Label(parent, text="Daftar Mahasiswa",
-                  font=("Helvetica", 14, "bold")).pack(anchor=W, pady=(0, 10))
+                  font=("Helvetica", 14, "bold"), bootstyle=INFO).pack(anchor=W, pady=(0, 10))
 
         self.mhs_cols = [{"text": "ID", "stretch": False},
                          {"text": "Nama", "stretch": True},
@@ -73,7 +73,7 @@ class DosenDashboard:
 
         self.table_mahasiswa = Tableview(
             parent, autoalign=True, coldata=self.mhs_cols, rowdata=[],
-            paginated=True, searchable=True, bootstyle=PRIMARY
+            paginated=True, searchable=True, bootstyle=INFO
         )
         self.table_mahasiswa.pack(fill=BOTH, expand=True)
 
@@ -120,7 +120,7 @@ class DosenDashboard:
     # ---- TAB MONITORING ----
     def _build_tab_monitoring(self, parent):
         ttk.Label(parent, text="Monitoring Absensi",
-                  font=("Helvetica", 14, "bold")).pack(anchor=W, pady=(0, 10))
+                  font=("Helvetica", 14, "bold"), bootstyle=INFO).pack(anchor=W, pady=(0, 10))
 
         filter_frame = ttk.Frame(parent)
         filter_frame.pack(fill=X, pady=(0, 10))
@@ -134,7 +134,7 @@ class DosenDashboard:
         self.entry_filter_nama = ttk.Entry(filter_frame, width=20)
         self.entry_filter_nama.pack(side=LEFT, padx=(0, 5))
 
-        ttk.Button(filter_frame, text="Cari", bootstyle=PRIMARY,
+        ttk.Button(filter_frame, text="Cari", bootstyle=INFO,
                    command=self._cari_monitoring).pack(side=LEFT, padx=(0, 5))
         ttk.Button(filter_frame, text="Reset", bootstyle=SECONDARY,
                    command=self._refresh_monitoring).pack(side=LEFT)
@@ -149,7 +149,7 @@ class DosenDashboard:
 
         self.table_monitoring = Tableview(
             parent, autoalign=True, coldata=self.mon_cols, rowdata=[],
-            paginated=True, searchable=False, bootstyle=PRIMARY
+            paginated=True, searchable=False, bootstyle=INFO
         )
         self.table_monitoring.pack(fill=BOTH, expand=True)
 
@@ -182,7 +182,7 @@ class DosenDashboard:
     # ---- TAB LAPORAN ----
     def _build_tab_laporan(self, parent):
         ttk.Label(parent, text="Laporan Absensi",
-                  font=("Helvetica", 14, "bold")).pack(anchor=W, pady=(0, 10))
+                  font=("Helvetica", 14, "bold"), bootstyle=INFO).pack(anchor=W, pady=(0, 10))
 
         notebook = ttk.Notebook(parent, bootstyle=SECONDARY)
         notebook.pack(fill=BOTH, expand=True)
@@ -204,7 +204,7 @@ class DosenDashboard:
         self.lap_entry_tgl.insert(0, date.today().isoformat())
         self.lap_entry_tgl.pack(side=LEFT, padx=(0, 5))
 
-        ttk.Button(filter_frame, text="Tampilkan", bootstyle=PRIMARY,
+        ttk.Button(filter_frame, text="Tampilkan", bootstyle=INFO,
                    command=self._tampilkan_laporan_harian).pack(side=LEFT, padx=(0, 10))
         ttk.Button(filter_frame, text="Export Excel", bootstyle=SUCCESS,
                    command=lambda: self._export_data('harian', 'excel')).pack(
@@ -226,7 +226,7 @@ class DosenDashboard:
 
         self.table_lap_harian = Tableview(
             parent, autoalign=True, coldata=self.lap_harian_cols, rowdata=[],
-            paginated=True, searchable=False, bootstyle=PRIMARY
+            paginated=True, searchable=False, bootstyle=INFO
         )
         self.table_lap_harian.pack(fill=BOTH, expand=True)
 
@@ -248,7 +248,7 @@ class DosenDashboard:
         self.lap_bulan_tahun.set(now.year)
         self.lap_bulan_tahun.pack(side=LEFT, padx=(0, 10))
 
-        ttk.Button(filter_frame, text="Tampilkan", bootstyle=PRIMARY,
+        ttk.Button(filter_frame, text="Tampilkan", bootstyle=INFO,
                    command=self._tampilkan_laporan_bulanan).pack(side=LEFT, padx=(0, 10))
         ttk.Button(filter_frame, text="Export Excel", bootstyle=SUCCESS,
                    command=lambda: self._export_data('bulanan', 'excel')).pack(
@@ -266,7 +266,7 @@ class DosenDashboard:
 
         self.table_lap_bulanan = Tableview(
             parent, autoalign=True, coldata=self.lap_bulanan_cols, rowdata=[],
-            paginated=True, searchable=False, bootstyle=PRIMARY
+            paginated=True, searchable=False, bootstyle=INFO
         )
         self.table_lap_bulanan.pack(fill=BOTH, expand=True)
 

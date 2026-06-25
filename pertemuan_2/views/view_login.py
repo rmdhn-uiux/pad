@@ -16,16 +16,18 @@ class LoginView:
         frame.pack(fill=BOTH, expand=True)
 
         ttk.Label(frame, text="SISTEM ABSENSI", font=("Helvetica", 18, "bold"),
-                  bootstyle=PRIMARY).pack(pady=(0, 5))
+                  bootstyle=INFO).pack(pady=(0, 5))
         ttk.Label(frame, text="Silakan login untuk melanjutkan",
                   font=("Helvetica", 10), bootstyle=SECONDARY).pack(pady=(0, 20))
 
-        ttk.Label(frame, text="Username", font=("Helvetica", 10)).pack(anchor=W)
+        ttk.Label(frame, text="Username", font=("Helvetica", 10),
+                  bootstyle=LIGHT).pack(anchor=W)
         self.entry_username = ttk.Entry(frame, font=("Helvetica", 11))
         self.entry_username.pack(fill=X, pady=(0, 10))
         self.entry_username.focus()
 
-        ttk.Label(frame, text="Password", font=("Helvetica", 10)).pack(anchor=W)
+        ttk.Label(frame, text="Password", font=("Helvetica", 10),
+                  bootstyle=LIGHT).pack(anchor=W)
         self.entry_password = ttk.Entry(frame, show="*", font=("Helvetica", 11))
         self.entry_password.pack(fill=X, pady=(0, 5))
 
@@ -33,7 +35,7 @@ class LoginView:
                                      bootstyle=DANGER)
         self.label_error.pack(pady=(0, 5))
 
-        self.btn_login = ttk.Button(frame, text="Login", bootstyle=SUCCESS,
+        self.btn_login = ttk.Button(frame, text="Login", bootstyle=INFO,
                                     command=self._handle_login)
         self.btn_login.pack(fill=X, pady=(10, 0))
 

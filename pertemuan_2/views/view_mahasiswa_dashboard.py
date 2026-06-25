@@ -29,16 +29,16 @@ class MahasiswaDashboard:
         info_frame.pack(side=LEFT)
 
         ttk.Label(info_frame, text=f"Selamat datang, {self.user['nama']}",
-                  font=("Helvetica", 16, "bold")).pack(anchor=W)
+                  font=("Helvetica", 16, "bold"), bootstyle=INFO).pack(anchor=W)
         ttk.Label(info_frame,
                   text=f"@{self.user['username']} | {self.user['role'].title()}",
                   font=("Helvetica", 10), bootstyle=SECONDARY).pack(anchor=W)
 
-        ttk.Button(header, text="Logout", bootstyle=SECONDARY,
+        ttk.Button(header, text="Logout", bootstyle=INFO,
                    command=self._handle_logout).pack(side=RIGHT)
 
     def _build_tabs(self):
-        notebook = ttk.Notebook(self.root, bootstyle=PRIMARY)
+        notebook = ttk.Notebook(self.root, bootstyle=INFO)
         notebook.pack(fill=BOTH, expand=True, padx=10, pady=5)
 
         tab_absen = ttk.Frame(notebook, padding=15)
@@ -50,11 +50,11 @@ class MahasiswaDashboard:
         self._build_tab_riwayat(tab_riwayat)
 
     def _build_tab_absen(self, parent):
-        card = ttk.Frame(parent, bootstyle=SECONDARY, padding=15)
+        card = ttk.Frame(parent, bootstyle=INFO, padding=15)
         card.pack(fill=X, pady=10)
 
         ttk.Label(card, text="Absensi Hari Ini",
-                  font=("Helvetica", 14, "bold")).pack(anchor=W)
+                  font=("Helvetica", 14, "bold"), bootstyle=LIGHT).pack(anchor=W)
 
         self.today_frame = ttk.Frame(card)
         self.today_frame.pack(fill=X, pady=10)
@@ -86,7 +86,7 @@ class MahasiswaDashboard:
         self.btn_masuk.pack(side=LEFT, padx=(0, 10))
 
         self.btn_pulang = ttk.Button(btn_frame, text="Absen Pulang",
-                                     bootstyle=INFO, width=20,
+                                     bootstyle=WARNING, width=20,
                                      command=self._absen_pulang)
         self.btn_pulang.pack(side=LEFT)
 
@@ -97,7 +97,7 @@ class MahasiswaDashboard:
 
     def _build_tab_riwayat(self, parent):
         ttk.Label(parent, text="Riwayat Absensi",
-                  font=("Helvetica", 14, "bold")).pack(anchor=W, pady=(0, 10))
+                  font=("Helvetica", 14, "bold"), bootstyle=INFO).pack(anchor=W, pady=(0, 10))
 
         search_frame = ttk.Frame(parent)
         search_frame.pack(fill=X, pady=(0, 10))
@@ -105,7 +105,7 @@ class MahasiswaDashboard:
         ttk.Label(search_frame, text="Cari:").pack(side=LEFT, padx=(0, 5))
         self.entry_cari = ttk.Entry(search_frame, width=30)
         self.entry_cari.pack(side=LEFT, padx=(0, 5))
-        ttk.Button(search_frame, text="Cari", bootstyle=PRIMARY,
+        ttk.Button(search_frame, text="Cari", bootstyle=INFO,
                    command=self._cari_riwayat).pack(side=LEFT)
 
         self.riwayat_cols = [{"text": "Tanggal", "stretch": False},
@@ -117,7 +117,7 @@ class MahasiswaDashboard:
         self.table_riwayat = Tableview(
             parent, autoalign=True,
             coldata=self.riwayat_cols, rowdata=[],
-            paginated=True, searchable=False, bootstyle=PRIMARY
+            paginated=True, searchable=False, bootstyle=INFO
         )
         self.table_riwayat.pack(fill=BOTH, expand=True)
 
